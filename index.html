@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>هند محمد | العلاج بالفن</title>
+<link rel="icon" href="logo.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=El+Messiri:wght@500;600;700&family=Almarai:wght@300;400;700;800&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;1,9..144,500&family=Work+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ambient texture layer -->
+<div class="grain"></div>
+<div class="glow glow-a"></div>
+<div class="glow glow-b"></div>
+
+<!-- ===== HEADER ===== -->
+<header class="site-header">
+  <div class="brand">
+    <img src="logo.jpg" alt="شعار هند محمد" class="brand-logo">
+    <div class="brand-text">
+      <span class="brand-name" data-i18n="brandName">هند محمد</span>
+      <span class="brand-sub" data-i18n="brandSub">معالِجة بالفن</span>
+    </div>
+  </div>
+
+  <nav class="site-nav">
+    <a href="#about" data-i18n="navAbout">من هي؟</a>
+    <a href="#help" data-i18n="navHelp">مين بتساعد؟</a>
+    <a href="#courses" data-i18n="navCourses">الكورسات</a>
+    <a href="#compass" data-i18n="navCompass">بوصلتك</a>
+    <a href="#faq" data-i18n="navFaq">أسئلة</a>
+  </nav>
+
+  <div class="header-actions">
+    <a href="#consultation" class="nav-cta" data-i18n="navConsultation">احجزي استشارة</a>
+    <button class="lang-switch" id="langSwitch" aria-label="Switch language">
+      <span class="lang-current">EN</span>
+    </button>
+  </div>
+</header>
+
+<!-- ===== HERO / LIVE STRIP ===== -->
+<section class="hero">
+  <div class="hero-copy">
+    <p class="eyebrow" data-i18n="heroEyebrow">مساحة آمنة… بلغة الفن</p>
+    <h1 class="hero-title" data-i18n="heroTitle">حين تعجز الكلمات<br>يتكلّم الفرشاة</h1>
+    <p class="hero-desc" data-i18n="heroDesc">علاج نفسي حقيقي، بأسلوب فني مختلف تمامًا عن الطرق التقليدية — تتعالجين وانتِ بتلوّني، بترسمي، وبتحكي حكايتك بشكل تاني.</p>
+    <div class="hero-ctas">
+      <a href="#consultation" class="btn btn-primary" data-i18n="heroCtaBook">احجزي استشارتك الأولى</a>
+      <a href="#help" class="btn btn-ghost" data-i18n="heroCta">اعرفي تقدرين تبدأي منين</a>
+    </div>
+  </div>
+
+  <div class="live-strip" aria-label="لحظات من رحلة العلاج بالفن">
+    <div class="live-strip-badge"><span class="dot"></span><span data-i18n="liveBadge">لقطات من الرحلة</span></div>
+    <div class="strip-frame">
+      <div class="strip-track" id="stripTrack">
+        <!-- slides injected by JS -->
+      </div>
+      <div class="strip-caption" id="stripCaption"></div>
+      <div class="strip-dots" id="stripDots"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CONSULTATION BOOKING ===== -->
+<section class="consultation" id="consultation">
+  <div class="consult-wrap">
+    <div class="consult-intro">
+      <p class="eyebrow" data-i18n="consultEyebrow">الخطوة الأولى</p>
+      <h2 class="section-title" data-i18n="consultTitle">احجزي استشارتك الأولى</h2>
+      <p class="consult-desc" data-i18n="consultDesc">قبل أي كورس أو التزام، ابدأي باستشارة قصيرة نتعرف فيها على حالتك ونرشح لك المسار الأنسب — التأكيد بيتم مباشرة على الواتساب مع هند.</p>
+      <ul class="consult-points">
+        <li><span class="pt-icon">✓</span><span data-i18n="consultPoint1">لا حاجة لتشخيص مسبق</span></li>
+        <li><span class="pt-icon">✓</span><span data-i18n="consultPoint2">سرية تامة لكل ما يُشارك</span></li>
+        <li><span class="pt-icon">✓</span><span data-i18n="consultPoint3">رد على استفسارك في نفس اليوم غالبًا</span></li>
+      </ul>
+    </div>
+
+    <form class="consult-form" id="consultForm">
+      <div class="field">
+        <label data-i18n="formNameLabel">اسمك</label>
+        <input type="text" id="cName" required data-i18n-ph="formNamePh" placeholder="اكتبي اسمك">
+      </div>
+      <div class="field">
+        <label data-i18n="formPhoneLabel">رقم الواتساب</label>
+        <input type="tel" id="cPhone" required data-i18n-ph="formPhonePh" placeholder="01xxxxxxxxx">
+      </div>
+      <div class="field">
+        <label data-i18n="formTypeLabel">نوع الطلب</label>
+        <select id="cType"></select>
+      </div>
+      <div class="field">
+        <label data-i18n="formTimeLabel">الميعاد المفضل للتواصل</label>
+        <select id="cTime"></select>
+      </div>
+      <div class="field field-wide">
+        <label data-i18n="formNoteLabel">تحبي تقولي حاجة قبل ما نتواصل؟ (اختياري)</label>
+        <textarea id="cNote" rows="3" data-i18n-ph="formNotePh" placeholder="اكتبي أي تفاصيل تحبي هند تعرفها مقدمًا..."></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary full field-wide" data-i18n="formSubmit">إرسال طلب الحجز على واتساب</button>
+      <p class="consult-privacy field-wide" data-i18n="consultPrivacy">بالضغط على إرسال، هيتفتح الواتساب برسالة جاهزة بالتفاصيل اللي كتبتيها — تقدري تعدلي فيها قبل الإرسال.</p>
+    </form>
+  </div>
+</section>
+
+<!-- ===== ABOUT ===== -->
+<section class="about" id="about">
+  <div class="about-portrait">
+    <div class="portrait-frame">
+      <img src="assets/portrait.png" alt="هند محمد مع أدوات الرسم" id="portraitImg">
+      <span class="portrait-tag" data-i18n="portraitTag">فرشاة، ألوان، واحتواء</span>
+    </div>
+  </div>
+  <div class="about-copy">
+    <p class="eyebrow" data-i18n="aboutEyebrow">تعرّفي عليها</p>
+    <h2 class="section-title" data-i18n="aboutTitle">هند محمد</h2>
+    <p class="about-text" data-i18n="aboutText1">معالجة نفسية بالفن، بخبرة تمتد لأكثر من 10 سنوات في الدمج بين الفن والعلاج النفسي — بتجمع بين الخبرة الإكلينيكية وبين الفن كأداة علاج فعلية، مش مجرد نشاط جانبي.</p>
+
+    <ul class="credentials" id="credentialsList"><!-- injected by JS --></ul>
+
+    <div class="about-signature" data-i18n="aboutSignature">"الفرشاة بتوصل لحتة جوّاكِ، الكلام لوحده مش بيوصلها"</div>
+  </div>
+</section>
+
+<!-- ===== WHO SHE HELPS ===== -->
+<section class="help" id="help">
+  <p class="eyebrow center" data-i18n="helpEyebrow">هل بتحسي بأي من ده؟</p>
+  <h2 class="section-title center" data-i18n="helpTitle">مش لازم يكون عندك "تشخيص" عشان تبدأي</h2>
+  <p class="help-intro center" data-i18n="helpIntro">دول بعض اللي بييجوا يشتكوا منه — لو حسيتي بحاجة قريبة من ده، فيه مساحة ليكِ هنا.</p>
+
+  <div class="help-grid" id="helpGrid"><!-- injected by JS --></div>
+</section>
+
+<!-- ===== COURSES / PRACTITIONER TRAINING ===== -->
+<section class="courses" id="courses">
+  <p class="eyebrow center" data-i18n="coursesEyebrow">لتأهيل المعالجين</p>
+  <h2 class="section-title center" data-i18n="coursesTitle">برنامج تأهيل المعالجين بالعلاج بالفن</h2>
+  <p class="help-intro center" data-i18n="coursesIntro">برنامج تدريبي متخصص لتأهيل المعالجين والراغبين في دخول مجال العلاج بالفن، على مستويين متتاليين.</p>
+
+  <div class="course-grid" id="courseGrid"><!-- injected by JS --></div>
+</section>
+
+<!-- Order modal -->
+<div class="modal-overlay" id="orderModal">
+  <div class="modal-card">
+    <button class="modal-close" id="modalClose" aria-label="close">×</button>
+    <p class="eyebrow" data-i18n="modalEyebrow">تأكيد الحجز</p>
+    <h3 id="modalCourseName"></h3>
+    <p class="modal-price" id="modalCoursePrice"></p>
+    <form id="orderForm" class="consult-form modal-form">
+      <div class="field field-wide">
+        <label data-i18n="formNameLabel">اسمك</label>
+        <input type="text" id="oName" required data-i18n-ph="formNamePh" placeholder="اكتبي اسمك">
+      </div>
+      <div class="field">
+        <label data-i18n="payMethodLabel">طريقة الدفع</label>
+        <select id="oPayMethod">
+          <option value="vodafone" data-i18n="payVodafone">فودافون كاش</option>
+          <option value="instapay" data-i18n="payInsta">إنستاباي (InstaPay)</option>
+        </select>
+      </div>
+      <div class="field">
+        <label data-i18n="payAccountLabel">رقم الحساب المحوَّل منه</label>
+        <input type="text" id="oAccount" required data-i18n-ph="payAccountPh" placeholder="01xxxxxxxxx">
+      </div>
+      <div class="field field-wide">
+        <label data-i18n="formNoteLabel">تحبي تقولي حاجة قبل ما نتواصل؟ (اختياري)</label>
+        <textarea id="oNote" rows="2" data-i18n-ph="formNotePh" placeholder="اكتبي أي تفاصيل تحبي هند تعرفها مقدمًا..."></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary full field-wide" data-i18n="modalConfirm">تأكيد الحجز وإرسال التفاصيل على واتساب</button>
+    </form>
+    <p class="modal-note" data-i18n="modalNote1">هيتم تأكيد الحجز عن طريق رسالة على الواتساب مباشرة مع هند.</p>
+  </div>
+</div>
+
+<!-- ===== SIGNATURE: MOOD COMPASS ===== -->
+<section class="compass" id="compass">
+  <div class="compass-inner">
+    <p class="eyebrow center" data-i18n="compassEyebrow">جربيها دلوقتي</p>
+    <h2 class="section-title center" data-i18n="compassTitle">بوصلة اللون الداخلية</h2>
+    <p class="help-intro center" data-i18n="compassIntro">٣ اختيارات صغيرة… وهي هتقولك تقريبًا أنتِ حاليًا فين، وأقرب طريقة فنية تساعدك تبدأي بيها.</p>
+
+    <div class="compass-box" id="compassBox"><!-- injected by JS --></div>
+  </div>
+</section>
+
+<!-- ===== TESTIMONIALS ===== -->
+<section class="testimonials" id="testimonials">
+  <p class="eyebrow center" data-i18n="testEyebrow">مش كلامي، كلامهم</p>
+  <h2 class="section-title center" data-i18n="testTitle">آراء العميلات</h2>
+  <div class="test-grid" id="testGrid"><!-- injected by JS --></div>
+</section>
+
+<!-- ===== FAQ ===== -->
+<section class="faq" id="faq">
+  <p class="eyebrow center" data-i18n="faqEyebrow">وارد يكون في تخوف</p>
+  <h2 class="section-title center" data-i18n="faqTitle">أسئلة بتتردد كتير</h2>
+  <div class="faq-list" id="faqList"><!-- injected by JS --></div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="site-footer">
+  <div class="footer-brand">
+    <img src="logo.jpg" alt="شعار هند محمد" class="footer-logo">
+    <p data-i18n="footerLine">مساحة آمنة… تتكلم فيها بالفرشاة قبل الكلام</p>
+  </div>
+  <div class="footer-links">
+    <a href="#consultation" data-i18n="navConsultation">احجزي استشارة</a>
+    <a href="#about" data-i18n="navAbout">من هي؟</a>
+    <a href="#courses" data-i18n="navCourses">الكورسات</a>
+    <a href="#faq" data-i18n="navFaq">أسئلة</a>
+  </div>
+  <p class="footer-copy" data-i18n="footerCopy">
+     <a href="https://wa.me/201090075321" target="_blank" 
+   style="display:inline-block; padding:10px 20px; background:#25D366; color:white; text-decoration:none; border-radius:5px;">
+   للدعم و التطوير اضغط
+</a>
+ </p>
+</footer>
+
+<!-- Floating WhatsApp -->
+<a href="#" id="floatWhatsapp" class="float-whatsapp" target="_blank" aria-label="واتساب">
+  <svg viewBox="0 0 32 32" fill="currentColor"><path d="M16.001 3C9.373 3 4 8.373 4 15c0 2.34.687 4.52 1.874 6.35L4 29l7.86-1.826A11.94 11.94 0 0 0 16.001 27C22.629 27 28 21.627 28 15S22.629 3 16.001 3zm6.94 16.94c-.29.815-1.694 1.556-2.34 1.65-.6.09-1.36.13-2.19-.14-.5-.16-1.14-.37-1.96-.73-3.46-1.49-5.72-4.98-5.9-5.22-.17-.24-1.4-1.86-1.4-3.55 0-1.69.89-2.52 1.2-2.86.31-.34.68-.42.9-.42.23 0 .45.002.65.012.21.01.49-.08.77.59.29.68.98 2.4 1.06 2.57.09.17.14.37.03.6-.11.23-.17.37-.33.57-.17.2-.35.44-.5.6-.17.17-.34.35-.15.68.19.34.87 1.43 1.87 2.32 1.29 1.15 2.38 1.51 2.72 1.68.34.17.54.14.74-.08.2-.22.85-.99 1.08-1.33.23-.34.45-.28.76-.17.31.11 1.99.94 2.33 1.11.34.17.57.26.65.4.09.15.09.85-.2 1.66z"/></svg>
+</a>
+
+<script src="app.js"></script>
+</body>
+</html>
