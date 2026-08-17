@@ -1,17 +1,19 @@
 /* ============ TOKENS ============ */
 :root{
-  --void:#0a0e10;
-  --panel:#141a1c;
-  --panel-2:#1c2426;
-  --gray-1:#232b2d;
-  --gray-2:#3a4245;
-  --line: rgba(143,227,230,0.14);
+  --void:#2b3033;
+  --panel:#343a3e;
+  --panel-2:#3d4448;
+  --gray-1:#454d51;
+  --gray-2:#6b757a;
+  --line: rgba(255,255,255,0.12);
   --turquoise:#3ecdd1;
   --turquoise-soft:#8fe3e6;
-  --sand:#d9b08c;
-  --sand-soft:#e8c9a0;
-  --text:#eef4f3;
-  --text-muted:#9fb0af;
+  --sand:#e39ac0;
+  --sand-soft:#f0b8d6;
+  --gold:#d9b76a;
+  --gold-soft:#e8cd94;
+  --text:#ffffff;
+  --text-muted:#dde4e3;
   --radius:18px;
   --font-ar-display:'El Messiri', 'Almarai', sans-serif;
   --font-ar-body:'Almarai', sans-serif;
@@ -53,8 +55,20 @@ section{position:relative;z-index:1;padding:110px 8vw;}
   background-size:3px 3px;
 }
 .glow{position:fixed;border-radius:50%;filter:blur(90px);z-index:0;pointer-events:none;}
-.glow-a{width:520px;height:520px;background:var(--turquoise);opacity:0.09;top:-160px;inset-inline-end:-160px;}
+.glow-a{width:520px;height:520px;background:var(--turquoise);opacity:0.10;top:-160px;inset-inline-end:-160px;}
 .glow-b{width:420px;height:420px;background:var(--sand);opacity:0.08;bottom:10%;inset-inline-start:-140px;}
+
+/* animated gold star dots */
+.stars-layer{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden;}
+.star{
+  position:absolute;border-radius:50%;background:var(--gold);
+  box-shadow:0 0 6px 1px rgba(217,183,106,0.65);
+  opacity:0;animation-name:twinkle;animation-timing-function:ease-in-out;animation-iteration-count:infinite;
+}
+@keyframes twinkle{
+  0%,100%{opacity:0;transform:scale(0.5);}
+  50%{opacity:1;transform:scale(1);}
+}
 
 /* ============ TYPE ============ */
 .eyebrow{
@@ -62,7 +76,7 @@ section{position:relative;z-index:1;padding:110px 8vw;}
   font-size:0.78rem;
   letter-spacing:0.14em;
   text-transform:uppercase;
-  color:var(--turquoise-soft);
+  color:var(--sand-soft);
   margin:0 0 14px;
 }
 .eyebrow.center{text-align:center;}
@@ -157,7 +171,7 @@ section{position:relative;z-index:1;padding:110px 8vw;}
 .live-strip-badge{
   display:inline-flex;align-items:center;gap:8px;margin-bottom:14px;
   font-family:var(--font-en-body);font-size:0.76rem;letter-spacing:0.1em;
-  color:var(--turquoise-soft);text-transform:uppercase;
+  color:var(--sand-soft);text-transform:uppercase;
 }
 .dot{width:8px;height:8px;border-radius:50%;background:var(--turquoise);
   box-shadow:0 0 0 0 rgba(62,205,209,0.6);animation:pulse 1.8s infinite;}
@@ -250,7 +264,7 @@ section{position:relative;z-index:1;padding:110px 8vw;}
   padding:8px 16px;border-radius:100px;font-size:0.82rem;color:var(--turquoise-soft);
   border:1px solid var(--line);
 }
-.about-text{color:var(--text-muted);line-height:1.9;margin-bottom:22px;font-size:1.02rem;}
+.about-text{color:var(--text);line-height:1.9;margin-bottom:22px;font-size:1.02rem;}
 .credentials{display:flex;flex-direction:column;gap:12px;margin:0 0 26px;}
 .credentials li{
   display:flex;align-items:flex-start;gap:10px;color:var(--text);font-size:0.95rem;line-height:1.7;
@@ -270,11 +284,28 @@ section{position:relative;z-index:1;padding:110px 8vw;}
   display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px;max-width:1100px;margin:0 auto;
 }
 .help-card{
-  background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);
-  padding:28px 24px;transition:transform .3s, border-color .3s, background .3s;
+  --card-color:var(--turquoise);
+  --card-tint:rgba(62,205,209,0.10);
+  background:linear-gradient(160deg,var(--card-tint),var(--panel));
+  border:1px solid var(--line);
+  border-top:3px solid var(--card-color);
+  border-radius:var(--radius);
+  padding:28px 24px;
+  transition:transform .35s ease, box-shadow .35s ease, border-color .35s ease;
 }
-.help-card:hover{transform:translateY(-4px);border-color:rgba(62,205,209,0.4);background:var(--panel-2);}
-.help-card .icon{font-size:1.6rem;margin-bottom:14px;display:block;}
+.help-card:hover{
+  transform:translateY(-9px) scale(1.015);
+  border-color:var(--card-color);
+  box-shadow:0 26px 48px -14px var(--card-color);
+}
+.help-card .icon{
+  width:46px;height:46px;border-radius:50%;
+  background:var(--card-tint);
+  color:var(--card-color);
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.4rem;margin-bottom:16px;
+  box-shadow:inset 0 0 0 1px var(--card-color);
+}
 .help-card h3{font-family:var(--font-ar-body);font-weight:700;font-size:1.05rem;margin:0 0 10px;color:var(--text);}
 .help-card p{color:var(--text-muted);font-size:0.92rem;line-height:1.75;margin:0;}
 
@@ -292,12 +323,12 @@ section{position:relative;z-index:1;padding:110px 8vw;}
 }
 .course-badge{
   display:inline-block;font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;
-  color:var(--turquoise-soft);border:1px solid var(--line);padding:5px 12px;border-radius:100px;margin-bottom:16px;
+  color:var(--sand-soft);border:1px solid var(--line);padding:5px 12px;border-radius:100px;margin-bottom:16px;
 }
 .course-card h3{font-family:var(--font-ar-display);font-weight:700;font-size:1.4rem;margin:0 0 10px;position:relative;z-index:1;}
 .course-card p.desc{color:var(--text-muted);font-size:0.92rem;line-height:1.8;margin-bottom:18px;position:relative;z-index:1;}
 .course-meta{display:flex;gap:10px;margin-bottom:20px;flex-wrap:wrap;position:relative;z-index:1;}
-.course-meta span{font-size:0.78rem;color:var(--text-muted);border:1px solid var(--line);padding:5px 11px;border-radius:100px;}
+.course-meta span{font-size:0.9rem;font-weight:700;color:var(--text);border:1px solid var(--line);padding:7px 14px;border-radius:100px;background:var(--panel-2);}
 .course-price{font-size:1.15rem;font-weight:700;color:var(--turquoise-soft);margin-bottom:18px;position:relative;z-index:1;}
 
 /* course gallery — manual arrows only, no autoplay */
@@ -324,7 +355,7 @@ section{position:relative;z-index:1;padding:110px 8vw;}
 .course-syllabus{margin-bottom:20px;position:relative;z-index:1;}
 .syllabus-block{margin-bottom:16px;}
 .syllabus-block h4{
-  font-size:0.85rem;color:var(--turquoise-soft);text-transform:uppercase;letter-spacing:0.05em;
+  font-size:0.85rem;color:var(--sand-soft);text-transform:uppercase;letter-spacing:0.05em;
   margin:0 0 10px;
 }
 .syllabus-block ul{display:flex;flex-direction:column;gap:7px;}
@@ -432,3 +463,4 @@ section{position:relative;z-index:1;padding:110px 8vw;}
   section{padding:80px 6vw;}
   .site-header{padding:14px 5vw;}
 }
+
