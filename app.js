@@ -11,8 +11,8 @@ const I18N = {
     brandName:"هند محمد", brandSub:"معالِجة بالفن",
     navAbout:"من هي؟", navHelp:"مين بتساعد؟", navCourses:"الكورسات", navCompass:"بوصلتك", navFaq:"أسئلة",
     heroEyebrow:"مساحة آمنة… بلغة الفن",
-    heroTitle:"حين تعجز الكلمات<br>يتكلّم الفرشاة",
-    heroDesc:"علاج نفسي حقيقي، بأسلوب فني مختلف تمامًا عن الطرق التقليدية — تتعالجي وانتِ بتلوّني، بترسمي، وبتحكي حكايتك بشكل تاني.",
+    heroTitle:"حين تعجز الكلمات<br>تتكلّم الفرشاة",
+    heroDesc:"علاج نفسي حقيقي، بأسلوب فني مختلف تمامًا عن الطرق التقليدية — تتعالجين وانتِ بتلوّني، بترسمي، وبتحكي حكايتك بشكل تاني.",
     heroCta:"اعرفي تبدأي منين",
     heroCtaBook:"احجزي استشارتك الأولى",
     liveBadge:"لقطات من الرحلة",
@@ -44,6 +44,7 @@ const I18N = {
     testEyebrow:"مش كلامي، كلامهم", testTitle:"آراء العميلات",
     faqEyebrow:"وارد يكون في تخوف", faqTitle:"أسئلة بتتردد كتير",
     footerLine:"مساحة آمنة… تتكلم فيها بالفرشاة قبل الكلام",
+    footerCopy:"© 2026 هند محمد — العلاج بالفن. جميع الحقوق محفوظة.",
     shareBtn:"شاركي مع صديقة محتاجة الدعم ده", copyLink:"تم نسخ رسالة المشاركة ✓",
     restartQuiz:"جربي مرة تانية"
   },
@@ -92,6 +93,31 @@ const I18N = {
 
 let currentLang = "ar";
 
+/* ====================================================================
+   0.5) حقل النجوم الذهبية المتحركة في الخلفية
+==================================================================== */
+(function buildStarsField(){
+  const layer = document.getElementById("starsLayer");
+  if(!layer) return;
+  const COUNT = 55;
+  for(let i=0;i<COUNT;i++){
+    const s = document.createElement("span");
+    s.className = "star";
+    const size = (Math.random()*2 + 1).toFixed(1);
+    const top = (Math.random()*100).toFixed(2);
+    const left = (Math.random()*100).toFixed(2);
+    const dur = (Math.random()*4 + 3).toFixed(2);
+    const delay = (Math.random()*5).toFixed(2);
+    s.style.width = size + "px";
+    s.style.height = size + "px";
+    s.style.top = top + "%";
+    s.style.left = left + "%";
+    s.style.animationDuration = dur + "s";
+    s.style.animationDelay = delay + "s";
+    layer.appendChild(s);
+  }
+})();
+
 function applyI18n(lang){
   currentLang = lang;
   document.documentElement.lang = lang;
@@ -135,7 +161,7 @@ function renderCredentials(){
 const STRIP_SLIDES = [
   { src:"assets/strip1.png", cap:{ar:"جلسة رسم فردية — الفرشاة بتبدأ الحكاية قبل الكلام", en:"An individual painting session — the brush opens the story before words do."} },
   { src:"assets/strip2.png", cap:{ar:"الألوان المائية وتهدئة الجهاز العصبي أثناء الجلسة", en:"Watercolour work helping the nervous system settle during the session."} },
-  { src:"assets/strip3.png", cap:{ar:"جلسات جروب — كل حصّانة (إيزيل) بتحمل رحلة مختلفة", en:"Group sessions — every easel holds a different journey."} },
+  { src:"assets/strip3.png", cap:{ar:"جلسات جروب — بتتعرفي علي نفسك من جديد", en:"Group sessions — every easel holds a different journey."} },
   { src:"assets/strip4.png", cap:{ar:"لحظة تفريغ وتسريح لمشاعر كانت متكتّمة", en:"A moment of releasing feelings that had been held in for too long."} }
 ];
 
@@ -172,18 +198,25 @@ setInterval(()=>{ if(!document.hidden) advanceStrip(); }, 4200);
    3) قسم "مين بتساعد؟"
 ==================================================================== */
 const HELP_ITEMS = [
-  {icon:"🌪️", ar:{t:"قلق مستمر ومخاوف مالها سبب واضح", d:"لو حاسة إن قلبك بيسبقك في كل قرار، أو فيه توتر داخلي مش قادرة تحدديه."}, en:{t:"Constant anxiety with no clear reason", d:"If your mind races ahead of every decision, or there's an inner tension you can't quite name."}},
-  {icon:"🌧️", ar:{t:"اكتئاب أو فقدان الرغبة في أي حاجة", d:"مش بس حزن، لكن فقدان الطاقة والمعنى في حاجات كانت بتفرحك."}, en:{t:"Depression or loss of motivation", d:"Not just sadness — losing energy and meaning in things that used to matter."}},
-  {icon:"⚡", ar:{t:"فرط الحركة وتشتت الانتباه عند السيدات", d:"صعوبة التركيز، كثرة الأفكار، والإحساس المستمر إنك «متأخرة» عن نفسك."}, en:{t:"ADHD in women", d:"Trouble focusing, racing thoughts, and a constant feeling of being behind."}},
-  {icon:"🌫️", ar:{t:"الفايبروميالجيا وآلام الجسد المرتبطة بالتوتر", d:"لما الجسم يبدأ يعبّر عن ضغط نفسي مكتوم عن طريق الألم."}, en:{t:"Fibromyalgia & stress-related body pain", d:"When the body starts speaking the tension the mind has been holding."}},
-  {icon:"🎭", ar:{t:"اضطرابات الشخصية الأساسية", d:"صعوبة في تنظيم المشاعر أو العلاقات، وتقلبات حادة في الإحساس بالذات."}, en:{t:"Core personality disorders", d:"Difficulty regulating emotions or relationships, and sharp shifts in self-image."}},
-  {icon:"💔", ar:{t:"الانفصال من علاقة", d:"سواء طلاق أو ارتباط انتهى، والشعور إنك بتعيدي تجميع نفسك تاني."}, en:{t:"Breakups & separation", d:"Whether a divorce or a relationship that ended — feeling like you're piecing yourself back together."}},
-  {icon:"🤍", ar:{t:"الأمهات العازبات (Single Mothers)", d:"حمل مضاعف من المسؤولية العاطفية والعملية، وقلة مساحة للاهتمام بنفسك."}, en:{t:"Single mothers", d:"Carrying double the emotional and practical load, with little space left for yourself."}},
-  {icon:"🛡️", ar:{t:"أثر العنف الأسري", d:"احتياج مساحة آمنة تمامًا للتعبير، بعيد عن أي حكم أو خوف من الكلام المباشر."}, en:{t:"Effects of domestic violence", d:"Needing a fully safe space to express what direct words are too heavy to carry."}},
+  {icon:"🌪️", color:"#3ecdd1", ar:{t:"قلق مستمر ومخاوف مالها سبب واضح", d:"لو حاسة إن قلبك بيسبقك في كل قرار، أو فيه توتر داخلي مش قادرة تحدديه."}, en:{t:"Constant anxiety with no clear reason", d:"If your mind races ahead of every decision, or there's an inner tension you can't quite name."}},
+  {icon:"🌧️", color:"#4a5a72", ar:{t:"اكتئاب أو فقدان الرغبة في أي حاجة", d:"مش بس حزن، لكن فقدان الطاقة والمعنى في حاجات كانت بتفرحك."}, en:{t:"Depression or loss of motivation", d:"Not just sadness — losing energy and meaning in things that used to matter."}},
+  {icon:"⚡", color:"#e8a23e", ar:{t:"فرط الحركة وتشتت الانتباه عند السيدات", d:"صعوبة التركيز، كثرة الأفكار، والإحساس المستمر إنك «متأخرة» عن نفسك."}, en:{t:"ADHD in women", d:"Trouble focusing, racing thoughts, and a constant feeling of being behind."}},
+  {icon:"🌫️", color:"#8a7ca8", ar:{t:"الفايبروميالجيا وآلام الجسد المرتبطة بالتوتر", d:"لما الجسم يبدأ يعبّر عن ضغط نفسي مكتوم عن طريق الألم."}, en:{t:"Fibromyalgia & stress-related body pain", d:"When the body starts speaking the tension the mind has been holding."}},
+  {icon:"🎭", color:"#a8425f", ar:{t:"اضطرابات الشخصية الأساسية", d:"صعوبة في تنظيم المشاعر أو العلاقات، وتقلبات حادة في الإحساس بالذات."}, en:{t:"Core personality disorders", d:"Difficulty regulating emotions or relationships, and sharp shifts in self-image."}},
+  {icon:"💔", color:"#e39ac0", ar:{t:"الانفصال من علاقة", d:"سواء طلاق أو ارتباط انتهى، والشعور إنك بتعيدي تجميع نفسك تاني."}, en:{t:"Breakups & separation", d:"Whether a divorce or a relationship that ended — feeling like you're piecing yourself back together."}},
+  {icon:"🤍", color:"#d9b76a", ar:{t:"الأمهات العازبات (Single Mothers)", d:"حمل مضاعف من المسؤولية العاطفية والعملية، وقلة مساحة للاهتمام بنفسك."}, en:{t:"Single mothers", d:"Carrying double the emotional and practical load, with little space left for yourself."}},
+  {icon:"🛡️", color:"#a2333f", ar:{t:"أثر العنف الأسري", d:"احتياج مساحة آمنة تمامًا للتعبير، بعيد عن أي حكم أو خوف من الكلام المباشر."}, en:{t:"Effects of domestic violence", d:"Needing a fully safe space to express what direct words are too heavy to carry."}},
 ];
+function hexToRgba(hex, alpha){
+  const h = hex.replace("#","");
+  const r = parseInt(h.substring(0,2),16);
+  const g = parseInt(h.substring(2,4),16);
+  const b = parseInt(h.substring(4,6),16);
+  return `rgba(${r},${g},${b},${alpha})`;
+}
 function renderHelpGrid(){
   document.getElementById("helpGrid").innerHTML = HELP_ITEMS.map(it=>`
-    <div class="help-card">
+    <div class="help-card" style="--card-color:${it.color};--card-tint:${hexToRgba(it.color,0.14)};">
       <span class="icon">${it.icon}</span>
       <h3>${it[currentLang].t}</h3>
       <p>${it[currentLang].d}</p>
@@ -200,7 +233,7 @@ const COURSES = [
     images:["assets/course1-1.png","assets/course1-2.png","assets/course1-3.png"],
     ar:{
       name:"تأهيل المعالجين بالعلاج بالفن — المستوى الأول",
-      desc:"مستوى تعليمي بالأساس (غير علاجي)، يؤسس للمفاهيم النظرية والتدريبات العملية اللازمة لدخول مجال العلاج بالفن.",
+      desc:"مستوى تعليمي بالأساس ، يؤسس للمفاهيم النظرية والتدريبات العملية اللازمة لدخول مجال العلاج بالفن.",
       meta:["مستوى تعليمي","نظري وعملي"],
       theory:["سيكولوجية اللون والأنماط المزاجية","نظرية الحواس الخمس في العلاج بالفن","الحاسة السمعية: الموسيقى كأداة علاجية","حاسة الشم وتأثيرها الحسي في الجلسة","مراحل النمو النفسي","أساسيات قراءة اللوحات الفنية","تدريب عملي على قراءة اللوحات","مراحل التعلم: الناقد الداخلي، الطفل، الراشد، الحدود"],
       practical:["سيكولوجية اللون: دائرة الألوان","تمرين الشجرة","تمرين التوازن","تمرين «لون بحبّه ولون بكرهه»","تدريب الحواس: حاسة اللمس","تمرين التنفس","تطبيقات على مراحل النمو"]
@@ -216,11 +249,11 @@ const COURSES = [
   },
   {
     id:"level2",
-    badge:{ar:"المستوى الثاني — الطمي", en:"Level 2 — Clay"},
+    badge:{ar:"المستوى الثاني  ", en:"Level 2 — Clay"},
     images:["assets/course2-1.png","assets/course2-2.png","assets/course2-3.png"],
     ar:{
-      name:"تأهيل المعالجين بالعلاج بالفن — المستوى الثاني (الطمي)",
-      desc:"مستوى متخصص في العلاج بالطمي، يجمع بين النظرية والتدريب الحر والتحليل، وصولًا لاستخدام الطمي في علاج الصدمات.",
+      name:"تأهيل المعالجين بالعلاج بالفن — المستوى الثاني ",
+      desc:"مستوى متخصص في العلاج بالطمي وطرق اخري، يجمع بين النظرية والتدريب الحر والتحليل، وصولًا لاستخدام طرق عملية في علاج الصدمات.",
       meta:["10 جلسات","جلسة أسبوعيًا","2 ساعة للجلسة","3-4 متدربين"],
       syllabus:["معلومات عامة عن الطمي ونظريته في العلاج النفسي","تدريب حر بالطمي","تمرين الذات","تمرين التنفس","تمرين الصعود","تمرين حر: بناء، ظل، ونور","قراءة الطمي كعمل فني","تدريب على القراءة الفنية","تمرين حر مع التحليل","قراءة الطمي في علاج الصدمات"]
     },
@@ -229,8 +262,7 @@ const COURSES = [
       desc:"A specialised clay-therapy level combining theory, free practice, and analysis — culminating in using clay work in trauma therapy.",
       meta:["10 sessions","Weekly session","2 hours per session","3-4 trainees"],
       syllabus:["General overview of clay and its theory in psychotherapy","Free practice with clay","The self exercise","Breathing exercise","The ascension exercise","Free exercise: building, shadow & light","Reading clay work as an art piece","Training in reading clay work","Free exercise with analysis","Reading clay work in trauma therapy"]
-    },
-    price:{ar:"4000 جنيه", en:"EGP 4000"}
+    }
   }
 ];
 
@@ -267,7 +299,6 @@ function renderCourses(){
       </div>
       <p class="desc">${c[currentLang].desc}</p>
       <div class="course-meta">${c[currentLang].meta.map(m=>`<span>${m}</span>`).join("")}</div>
-      <p class="course-price">${c.price[currentLang]}</p>
       ${syllabusHtml}
       <button class="btn btn-primary full" onclick="openOrder('${c.id}')">${currentLang==='ar'?'احجزي هذا المستوى':'Book this level'}</button>
     </div>`;
@@ -294,7 +325,6 @@ let currentOrderCourse = null;
 function openOrder(courseId){
   currentOrderCourse = COURSES.find(x=>x.id===courseId);
   document.getElementById("modalCourseName").textContent = currentOrderCourse[currentLang].name;
-  document.getElementById("modalCoursePrice").textContent = currentOrderCourse.price[currentLang];
   document.getElementById("orderForm").reset();
   orderModal.classList.add("open");
 }
@@ -312,8 +342,8 @@ document.getElementById("orderForm").addEventListener("submit",(e)=>{
   const c = currentOrderCourse;
 
   const msg = currentLang === "ar"
-    ? `مرحبًا هند، أنا ${name}.\nأريد حجز: "${c.ar.name}"\nالسعر: ${c.price.ar}\nطريقة الدفع: ${payLabel}\nرقم الحساب المحوَّل منه: ${account}${note ? `\nملاحظة: ${note}` : ""}`
-    : `Hi Hend, I'm ${name}.\nI'd like to book: "${c.en.name}"\nPrice: ${c.price.en}\nPayment method: ${payLabel}\nAccount number transferred from: ${account}${note ? `\nNote: ${note}` : ""}`;
+    ? `مرحبًا هند، أنا ${name}.\nأريد حجز: "${c.ar.name}"\nطريقة الدفع: ${payLabel}\nرقم الحساب المحوَّل منه: ${account}${note ? `\nملاحظة: ${note}` : ""}`
+    : `Hi Hend, I'm ${name}.\nI'd like to book: "${c.en.name}"\nPayment method: ${payLabel}\nAccount number transferred from: ${account}${note ? `\nNote: ${note}` : ""}`;
 
   window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`, "_blank");
   orderModal.classList.remove("open");
@@ -323,7 +353,7 @@ document.getElementById("orderForm").addEventListener("submit",(e)=>{
    4.5) نظام حجز الاستشارة — نفس منطق الواتساب المستخدم في الكورسات
 ==================================================================== */
 const CONSULT_TYPES = [
-  {ar:"استشارة أولية ", en:" initial consultation"},
+  {ar:"استشارة أولية مجانية", en:"Free initial consultation"},
   {ar:"استفسار عن كورس معين", en:"Inquiry about a specific course"},
   {ar:"حجز جلسة فردية", en:"Book an individual session"}
 ];
@@ -381,7 +411,7 @@ const COMPASS_QUESTIONS = [
 const COMPASS_RESULTS = {
   anxiety:{color:"#3ecdd1", ar:{h:"إنتِ في مرحلة «التهدئة»", p:"الفن المائي والتلوين البطيء ممكن يبدأ يهدّي جهازك العصبي قبل أي خطوة تانية. احجزي استشارة أولية وهند هترشح لك نقطة البداية المناسبة."}, en:{h:"You're in a Calming phase", p:"Slow watercolour and colouring work can begin settling your nervous system before anything else. Book an initial consultation and Hend will recommend the right starting point."}},
   depression:{color:"#5c6668", ar:{h:"إنتِ في مرحلة «إعادة الإحساس»", p:"الهدف دلوقتي مش الإنتاجية، الهدف إنك تحسي بحاجة تاني. احجزي استشارة قصيرة نتكلم فيها بهدوء عن الخطوة التالية."}, en:{h:"You're in a Re-sensing phase", p:"The goal isn't productivity right now — it's feeling something again. Book a short consultation so we can gently talk through the next step."}},
-  adhd:{color:"#d9b08c", ar:{h:"إنتِ في مرحلة «التجميع»", p:"محتاجة مساحة تحطي فيها كل الأفكار المتشتتة في شكل واحد. ابدأي باستشارة أولية عشان نحدد خطة تناسبك."}, en:{h:"You're in a Gathering phase", p:"You need a space to bring the scattered thoughts into one shape. Start with an initial consultation so we can outline a plan that fits you."}}
+  adhd:{color:"#e8a23e", ar:{h:"إنتِ في مرحلة «التجميع»", p:"محتاجة مساحة تحطي فيها كل الأفكار المتشتتة في شكل واحد. ابدأي باستشارة أولية عشان نحدد خطة تناسبك."}, en:{h:"You're in a Gathering phase", p:"You need a space to bring the scattered thoughts into one shape. Start with an initial consultation so we can outline a plan that fits you."}}
 };
 
 let compassStep = 0;
@@ -482,9 +512,10 @@ function renderFaq(){
    8) واتساب العائم
 ==================================================================== */
 document.getElementById("floatWhatsapp").href =
-  `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent("مرحبًا هند، حابه أستفسر عن جلسات العلاج بالفن.")}`;
+  `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent("مرحبًا هند، أحب أستفسر عن جلسات العلاج بالفن.")}`;
 
 /* ====================================================================
    9) أول تشغيل
 ==================================================================== */
 applyI18n("ar");
+
